@@ -1,0 +1,12 @@
+.blueColor{
+   color: #428bca !important;
+}
+
+.collapsible-header.active {
+  background-color: #f3ecec !important;
+}
+
+.accordionHeader{
+  /*background-color: #f3ecec;*/
+}
+

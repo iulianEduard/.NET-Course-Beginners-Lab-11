@@ -1,0 +1,16 @@
+<ul class="collection with-header">
+  <li class="collection-header"><h5><b>Most Recent Activities, click to continue...</b></h5></li>
+  <li class="collection-item avatar" *ngFor="let activity of recentActivity">
+    <img src="{{activity.photo}}" alt="" class="circle responsive-img">
+    <span class="title">{{activity.name}}</span>
+    <p>{{activity.description}}</p>
+    <a class="link" routerLink="/resident/details/{{activity.id}}" class="secondary-content"><i class="material-icons">send</i></a>
+  </li>
+</ul>
+
+<ul class="collection with-header">
+  <li class="collection-header"><h5><b>Your Residents Current Status...</b></h5></li>
+  <li class="collection-item avatar">
+
+  </li>
+</ul>

@@ -1,0 +1,29 @@
+<div class="row">
+  <ul class="collection with-header">
+    <li class="collection-header"><h5><b>MANAGE HOME ALERTS</b></h5></li>
+    <li class="collection-item avatar" *ngFor="let facilityAlert of facilityAlerts">
+      <span class="title">{{facilityAlert.name}}</span>
+      <p>{{facilityAlert.description}}</p>
+      <a class="link" routerLink="/alert/facility/details/{{facilityAlert.id}}" class="secondary-content">
+        <i class="material-icons">send</i> </a>
+    </li>
+  </ul>
+  <ul class="collection with-header">
+    <li class="collection-header"><h5><b>RESIDENT CARE ALERTS</b></h5></li>
+    <li class="collection-item avatar" *ngFor="let residentAlert of residentAlerts">
+      <span class="title">{{residentAlert.name}}</span>
+      <p>{{residentAlert.description}}</p>
+      <a class="link" routerLink="/alert/resident/details/{{residentAlert.id}}" class="secondary-content"><i
+        class="material-icons">send</i></a>
+    </li>
+  </ul>
+  <ul class="collection with-header">
+    <li class="collection-header"><h5><b>MANAGE STAFF ALERTS</b></h5></li>
+    <li class="collection-item avatar" *ngFor="let staffAlert of staffAlerts">
+      <span class="title">{{staffAlert.name}}</span>
+      <p>{{staffAlert.description}}</p>
+      <a class="link" routerLink="/alert/staff/details/{{staffAlert.id}}" class="secondary-content"><i
+        class="material-icons">send</i></a>
+    </li>
+  </ul>
+</div>

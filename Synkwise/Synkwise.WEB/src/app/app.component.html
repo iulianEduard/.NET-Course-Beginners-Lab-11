@@ -1,0 +1,14 @@
+<div class="page-flexbox-wrapper">
+  <toaster-container [toasterconfig]="toasterConfig"></toaster-container>
+  <app-navigation *ngIf="loggedIn$ | async"></app-navigation>
+  <main class="grey lighten-5">
+    <div class="left-container">
+
+    </div>
+    <div class="container main-container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,16 @@
+<div class="row page-content">
+  <div class="login-inner">
+    <div class="card login">
+      <div class="card-logo center">
+        <img src="assets/logo.png" alt="SYNKWISE"/>
+      </div>
+      <div class="card-content">
+        <login-form (loginUser)="loginUser($event)"></login-form>
+      </div>
+      <div class="card-footer section center">
+        <a [routerLink]="['/authentication/forgot']">Forgot Your Password?</a>
+        <!--<a href="/authentication/register" class="right">Sign up</a>-->
+      </div>
+    </div>
+  </div>
+</div>

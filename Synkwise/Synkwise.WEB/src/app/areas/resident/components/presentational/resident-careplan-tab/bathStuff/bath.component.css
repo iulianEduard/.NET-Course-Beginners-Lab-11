@@ -1,0 +1,8 @@
+.noPaddingLR input[type=text]{
+  height: inherit !important;
+}
+
+.headerTable {
+  font-weight: bold;
+}
+

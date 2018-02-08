@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper.Core" Version="2.0.4" />
+    <PackageReference Include="Identity.Dapper" Version="0.6.2-alpha" />
+    <PackageReference Include="Identity.Dapper.SqlServer" Version="0.6.1-alpha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Synkwise.Core\Synkwise.Core.csproj" />
+  </ItemGroup>
+
+</Project>

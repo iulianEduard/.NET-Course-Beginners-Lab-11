@@ -1,0 +1,44 @@
+﻿<div class="row login page-content">
+  <form id="resetPswFromID" novalidate [formGroup]="form" class="col s12 inner-form" (ngSubmit)="onSubmit(form)">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="password" type="password" formControlName="password" maxlength="40">
+        <label for="password">New password</label>
+        <span class="error">
+          <span *ngIf="form.get('password').hasError('required') && form.get('password').touched">
+            * New Password is required
+          </span>
+           <span *ngIf="form.get('password').hasError('notValid')">
+            * Please choose a strong password(min 7 characters, numbers, symbols, uppercase and lowercase letters)
+          </span>
+           <span class="error"
+                 *ngIf="form.get('password').touched && form.get('password').hasError('maxlength')">
+                    <span>* Email max-length is 40 characters </span>
+           </span>
+        </span>
+      </div>
+
+      <div class="input-field col s12">
+        <input id="confirmPassword" type="password" formControlName="confirmPassword" maxlength="40">
+        <label for="confirmPassword">Confirm password</label>
+        <span class="error">
+          <span *ngIf="form.get('confirmPassword').hasError('required') && form.get('confirmPassword').touched">
+            * Confirm Password is required
+          </span>
+          <span *ngIf="!form.get('confirmPassword').hasError('required') && form.get('confirmPassword').touched && form.get('confirmPassword').value != form.get('password').value">
+            * Confirm Password should match New Password
+          </span>
+           <span class="error"
+                 *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').hasError('maxlength')">
+                    <span>* Email max-length is 40 characters </span>
+           </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row center">
+      <button class="btn waves-effect waves-light  light-green" type="submit" [disabled]="form.invalid || form.get('password').value != form.get('confirmPassword').value">Reset Password</button>
+      <a class="mat-button marginLeft20" [routerLink]="['/authentication/login']">Back to Log-in screen</a>
+    </div>
+  </form>
+</div>

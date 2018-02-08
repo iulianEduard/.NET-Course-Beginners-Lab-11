@@ -1,0 +1,12 @@
+.login .row{
+  margin-bottom:4px;
+}
+
+.login .input-field{
+  margin-top:8px;
+  margin-bottom:10px;
+}
+.login .input-field input{
+  margin-bottom:0px;
+  height:2.6rem;
+}

@@ -1,0 +1,6 @@
+<div class="noMargin">
+  <input name="{{inputname}}" class="noMargin" placeholder="{{inputPlaceholder}}"
+         [(ngModel)]="searchModel" maxlength="35"
+         (blur)="setSearchValue(inputColumnSearchName)">
+  <i class="closeIcon" (click)="resetSearchProperty()" >&times;</i>
+</div>

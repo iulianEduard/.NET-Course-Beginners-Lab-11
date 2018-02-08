@@ -1,0 +1,25 @@
+.brand-logo{
+  padding-left:25px;
+}
+.brand-logo {
+  color:black;
+}
+li a.link{
+  color: black;
+}
+
+header {
+  margin-bottom:20px;
+}
+
+.dropdownMenu .dropdown-content{
+  top: 65px !important;
+}
+
+.dropdownMenu li a, .dropdownMenu a{
+  color: black;
+}
+
+.dropdownMenu i {
+  margin-left: 5px;
+}

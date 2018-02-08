@@ -1,0 +1,113 @@
+/* You can add global styles to this file, and also import other style files */
+.inner-form .error {
+  margin-left: 0;
+  display: block;
+  color: #F44336;
+  font-size: 12px;
+  height: 20px;
+  opacity: 0.8;
+  line-height: 14px;
+}
+
+.inner-form .error.icon-field {
+  margin-left: 40px;
+}
+
+a {
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.marginLeft20 {
+  margin-left: 20px;
+}
+
+/*toaster*/
+.toast-success {
+  background-color: #51a351 !important;
+}
+
+.toast-error {
+  background-color: #bd362f !important;
+}
+
+.toast-info {
+  background-color: #2f96b4 !important;
+}
+
+.toast-wait {
+  background-color: #2f96b4 !important;
+}
+
+.toast-warning {
+  background-color: #f89406 !important;
+}
+
+/*table*/
+.headerLink {
+  cursor: pointer;
+}
+
+.headerTable{
+  background-color: lightgray !important;
+}
+
+.st-sort-ascent:before {
+  content: "\25B4";
+}
+
+.st-sort-descent:before {
+  content: "\25BE";
+}
+
+.closeIcon{
+  position: relative;
+  right: 20px;
+  font-family: monospace;
+  cursor: pointer;
+  padding-right: 10px;
+  font-size: 20px;
+}
+
+/*//datepicker*/
+.mydp{
+  border-bottom: 1px solid #9e9e9e !important;
+  margin-top: 9px !important;
+  border-radius: 0px !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.noPaddingLR, .noPaddingLR > tr, .noPaddingLR > tr > td{
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+.noPaddingTB, .noPaddingLR > tr > td{
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+
+/*//careplan styles*/
+.title {
+  text-align: center;
+}
+
+.radioCustom {
+  width: 50%;
+  margin: 0 10px 0 auto;
+  text-align: left;
+}
+.radioCustom > label{
+  color: black !important;
+}
+
+.noMarginTD {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+

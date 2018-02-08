@@ -1,0 +1,81 @@
+﻿<div class="row login page-content">
+  <div class="row" *ngIf="expiredCode">
+    <div class="input-field col s12">
+      <h5>Invitation code is expired. Please contact the administrator from email</h5>
+    </div>
+  </div>
+
+  <form novalidate [formGroup]="userModel" class="col s12 inner-form" (ngSubmit)="onSubmit(userModel)"
+        *ngIf="!expiredCode">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" formControlName="email" maxlength="255">
+        <label for="email">Email</label>
+        <span class="error">
+          <span *ngIf="userModel.get('email').hasError('required') && userModel.get('email').touched">
+            * Email is required
+          </span>
+           <span *ngIf="userModel.get('email').hasError('notEmail')">
+            * Incorrect email
+          </span>
+           <span class="error"
+                 *ngIf="userModel.get('email').touched && userModel.get('email').hasError('maxlength')">
+                    <span>* Email max-length is 255 characters </span>
+           </span>
+        </span>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="password" type="password" formControlName="password" maxlength="25">
+        <label for="password">New password</label>
+        <span class="error">
+          <span *ngIf="userModel.get('password').hasError('required') && userModel.get('password').touched">
+            * New Password is required
+          </span>
+          <span *ngIf="userModel.get('password').hasError('notValid')">
+            * Please choose a strong password(min 7 characters, uppercase and lowercase letters, numbers and symbols )
+          </span>
+           <span class="error"
+                 *ngIf="userModel.get('password').touched && userModel.get('password').hasError('maxlength')">
+                    <span>* Email max-length is 40 characters </span>
+           </span>
+        </span>
+      </div>
+
+      <div class="input-field col s6">
+        <input id="confirmPassword" type="password" formControlName="confirmPassword" maxlength="40">
+        <label for="confirmPassword">Confirm password</label>
+        <span class="error">
+          <span
+            *ngIf="userModel.get('confirmPassword').hasError('required') && userModel.get('confirmPassword').touched">
+            * Confirm Password is required
+          </span>
+
+          <span
+            *ngIf="!userModel.get('confirmPassword').hasError('required') && userModel.get('confirmPassword').touched && userModel.get('confirmPassword').value != userModel.get('password').value">
+            * Confirm Password should match Password
+          </span>
+           <span class="error"
+                 *ngIf="userModel.get('confirmPassword').touched && userModel.get('confirmPassword').hasError('maxlength')">
+                    <span>* Confirm password max-length is 40 characters </span>
+           </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row center">
+      <button class="btn waves-effect waves-light  light-green" type="submit"
+              [disabled]="userModel.invalid || userModel.get('password').value != userModel.get('confirmPassword').value">
+        Register
+      </button>
+      <a class="mat-button marginLeft20" [routerLink]="['/authentication/login']">Back to Log-in screen</a>
+    </div>
+
+    <div class="form-group">
+      <div class="col s12 center">
+        <p class="italic">*Once you click Register, you will receive a confirmation email to verify your
+          email address. If you don't receive an email from us within 5 minutes, please call us!</p>
+      </div>
+    </div>
+  </form>
+</div>

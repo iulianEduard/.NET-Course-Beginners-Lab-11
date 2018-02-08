@@ -1,0 +1,47 @@
+﻿<div id="sendInvitationID" class="row login page-content">
+  <form novalidate [formGroup]="invitationModel" class="col s12 inner-form" (ngSubmit)="onSubmit(invitationModel)">
+    <div class="row">
+
+      <div class="col s12 m4">
+        <label>User Role *</label>
+        <select class="browser-default" formControlName="roleId">
+          <option value="" selected disabled>Select role</option>
+          <option *ngFor="let r of roleList" [value]="r.id">{{r.name}}</option>
+        </select>
+
+        <span class="error">
+          <span *ngIf="invitationModel.get('roleId').hasError('required') && invitationModel.get('roleId').touched">
+            * Role is required
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m5">
+        <input id="email" type="email" formControlName="emailTo" maxlength="255">
+        <label for="email">Email</label>
+        <span class="error">
+          <span *ngIf="invitationModel.get('emailTo').hasError('required') && invitationModel.get('emailTo').touched">
+            * Email is required
+          </span>
+           <span *ngIf="invitationModel.get('emailTo').hasError('notEmail')">
+            * Incorrect email
+          </span>
+          <span class="error"
+                 *ngIf="invitationModel.get('emailTo').touched && invitationModel.get('emailTo').hasError('maxlength')">
+                    <span>* Email max-length is 255 characters </span>
+           </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row center">
+      <button class="btn waves-effect waves-light  light-green" type="submit"
+              [disabled]="invitationModel.invalid">
+        {{invitationForEdit?.id > 0 ? 'Renew Invitation': 'Send Invitation'}}
+      </button>
+      <a class="mat-button marginLeft20" [routerLink]="['/management/home']">Back</a>
+    </div>
+  </form>
+</div>

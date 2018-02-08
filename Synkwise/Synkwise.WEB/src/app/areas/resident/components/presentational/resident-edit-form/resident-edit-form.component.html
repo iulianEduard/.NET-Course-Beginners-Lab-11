@@ -1,0 +1,250 @@
+<div id="residentEditForm" class="row residentEditForm">
+  <form class="col s12 inner-form" novalidate [formGroup]="residentModel" class="inner-form"
+        (ngSubmit)="onSubmit(residentModel)" autocomplete="off">
+    <div class="row bottom10">
+      <div class="col s12 m5">
+        <label>Facility Location *</label>
+        <select class="browser-default" formControlName="facilityID">
+          <option value="" selected disabled>Select facility</option>
+          <option *ngFor="let f of facilityList" [value]="f.id">{{f.name}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m4">
+        <input id="firstName" type="text" formControlName="firstName">
+        <label for="firstName">
+          Resident’s name: (Must have unique name.)</label>
+        <span class="error">
+             <span *ngIf="residentModel.get('firstName').hasError('required')
+               && residentModel.get('firstName').touched"> * Name is required
+             </span>
+          </span>
+      </div>
+
+      <div class="input-field col s12 m4">
+        <input id="lastName" type="text" formControlName="lastName">
+        <label for="lastName">Last Name</label>
+        <span class="error">
+             <span *ngIf="residentModel.get('lastName').hasError('required')
+               && residentModel.get('lastName').touched"> * Last Name is required
+             </span>
+          </span>
+      </div>
+
+      <div class="input-field col s12 m4">
+        <synkwise-input-date id="dateOfAdmission" [defaultDate]="residentForEdit.dateOfAdmission"
+                             (setDateMethod)="setDateAdmission($event)"
+                             [inputName]="dateOfAdmissionID"></synkwise-input-date>
+        <label for="dateOfAdmission" [ngClass]="{'active': residentModel.get('dateOfAdmission')}">Date of
+          admission</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s16 m4">
+        <input id="address" type="text" formControlName="address">
+        <label for="address">Resident’s current address</label>
+      </div>
+
+      <div class="input-field col s6 m3">
+        <input id="city" type="text" formControlName="city">
+        <label for="city">City</label>
+      </div>
+
+      <div class="input-field col s6 m1">
+        <input id="state" type="text" formControlName="state">
+        <label for="city">State</label>
+      </div>
+
+      <div class="input-field col s6 m1">
+        <input id="zipCode" type="text" formControlName="zipCode">
+        <label for="city">Zip code</label>
+      </div>
+
+      <div class="input-field col s6 m3">
+        <input id="phone" type="text" maxlength="50" formControlName="phone"
+               [textMask]="{mask: phoneMask}">
+        <label for="phone">Phone Number</label>
+        <span class="error icon-field">
+                      <span *ngIf="residentModel.get('phone').hasError('notPhone')">
+                        * Incorrect phone
+                      </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m8">
+        <input id="livingSituation" type="text" formControlName="livingSituation">
+        <label for="livingSituation">Resident’s current living situation</label>
+      </div>
+
+      <div class="input-field col s12 m4">
+        <input id="livingDuration" type="text" formControlName="livingDuration">
+        <label for="livingDuration">How long?</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m8">
+        <input id="primaryCaregiver" type="text" formControlName="primaryCaregiverFirstName">
+        <label for="primaryCaregiver">Resident’s current primary caregiver:</label>
+      </div>
+
+      <div class="input-field col s12 m4">
+        <input id="primaryCaregiverPhone" type="text" maxlength="50" formControlName="primaryCaregiverPhone"
+               [textMask]="{mask: phoneMask}">
+        <label for="primaryCaregiverPhone">Phone Number</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m4">
+        <synkwise-input-date id="bod" [defaultDate]="residentForEdit.dateOfBirth"
+                             [inputName]="bodID" (setDateMethod)="setDateofBirth($event)"></synkwise-input-date>
+        <label for="address" [ngClass]="{'active': residentModel.get('dateOfBirth')}">Date of birth</label>
+      </div>
+
+      <div class="input-field col s6 m3">
+        <input id="height" type="text" formControlName="height" [textMask]="{mask: heightMask}">
+        <label for="height">Height (ft-in)</label>
+      </div>
+
+      <div class="input-field col s6 m3">
+        <input id="weight" type="number" formControlName="weight">
+        <label for="weight">Weight (lbs)</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m4">
+        <input id="Medicare" type="number" formControlName="medicareNumber">
+        <label for="Medicare">Medicare #</label>
+      </div>
+
+      <div class="input-field col s6 m3">
+        <input id="medicaid" type="number" formControlName="medicAidNumber">
+        <label for="medicaid">Medicaid #</label>
+      </div>
+
+      <div class="input-field col s6 m3">
+        <input id="va" type="number" formControlName="vaNumber">
+        <label for="va">VA #</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m4">
+        <input id="Insurance" type="text" formControlName="insurance">
+        <label for="Insurance">Insurance</label>
+      </div>
+
+      <div class="input-field col s6 m2">
+        <input id="clainnb" type="text" formControlName="insuranceClaimNumber">
+        <label for="clainnb">Claim number</label>
+      </div>
+
+      <div class="input-field col s12 m4">
+        <input id="casemanager" type="text" formControlName="caseManagerContactID">
+        <label for="casemanager">Case manager</label>
+      </div>
+
+      <div class="input-field col s6 m2">
+        <input id="casemanagerPhone" type="text" maxlength="50" formControlName="caseManagerPhone"
+               [textMask]="{mask: phoneMask}">
+        <label for="casemanagerPhone">Phone number</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m12">
+        <i class="material-icons prefix">mode_edit</i>
+        <textarea id="medicaldiagnosis" class="materialize-textarea" maxlength="500" formControlName="medicalDiagnosis"></textarea>
+        <label for="medicaldiagnosis">Medical diagnosis (including illness and injury)</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m12">
+        <i class="material-icons prefix">mode_edit</i>
+        <textarea id="behavioursConditions" class="materialize-textarea" maxlength="500" formControlName="behavioralConditions"></textarea>
+        <label for="behavioursConditions">Behavioral conditions (including distressing, disruptive or potentially harmful symptoms):</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m12">
+        <i class="material-icons prefix">mode_edit</i>
+        <textarea id="medicamentation" class="materialize-textarea" maxlength="500" formControlName="medications"></textarea>
+        <label for="medicamentation">Medications (including over-the-counter medications and supplements)</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m12">
+        <i class="material-icons prefix">mode_edit</i>
+        <textarea id="treatments" class="materialize-textarea" maxlength="500" formControlName="treatments"></textarea>
+        <label for="treatments">Treatments and therapies</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Advanced health care directive</label>
+      <input name="advancedHealthCareDirective" id="nohealth" type="radio" value="false" formControlName="advancedHealthCareDirective" />
+      <label for="nohealth">No</label>
+
+      <input name="advancedHealthCareDirective" id="yeshealth" type="radio" value="true" formControlName="advancedHealthCareDirective" />
+      <label for="yeshealth">Yes, copies attached</label>
+
+      <div class="file-field input-field col s12 m12">
+        <div class="btn">
+          <span>Browse</span>
+          <input type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Upload one file">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>POLST (Physicians Orders for Life Supporting Treatment)</label>
+      <input name="polst" id="nopolst" type="radio" value="false" formControlName="polst" />
+      <label for="nopolst">No</label>
+
+      <input name="polst" id="yespolst" type="radio" value="true" formControlName="polst" />
+      <label for="yespolst">Yes, copies attached</label>
+
+      <div class="file-field input-field col s12 m12">
+        <div class="btn">
+          <span>Browse</span>
+          <input type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Upload one file">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12 m12">
+        <i class="material-icons prefix">mode_edit</i>
+        <textarea id="funeralPlan" class="materialize-textarea" maxlength="500" formControlName="funeralPlan"></textarea>
+        <label for="funeralPlan">Mortuary/funeral plan:</label>
+      </div>
+    </div>
+
+
+    <div class="row center">
+      <button class="btn waves-effect waves-light light-green" type="submit" [disabled]="residentModel.invalid">
+        Save new Resident
+      </button>
+      <a class="mat-button marginLeft20" *ngIf="!residentForEdit.id" [routerLink]="['/resident/home']">Back</a>
+      <a class="mat-button marginLeft20" *ngIf="residentForEdit.id > 0"
+         routerLink="/resident/details/{{residentForEdit?.id}}">Back</a>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,6 @@
+<div id="dateInputCustom">
+  <my-date-picker id="{{inputName}}"  placeholder="Select a date" [(ngModel)]="defaultDate" class="customDatePicker"
+                  (dateChanged)="onDateChanged($event)" [options]="myDatePickerOptions"
+                  [selDate]="selDate"></my-date-picker>
+  <!--<input id="{{inputName}}" type="text" class="customdatepicker" [(ngModel)]="startDate">-->
+</div>

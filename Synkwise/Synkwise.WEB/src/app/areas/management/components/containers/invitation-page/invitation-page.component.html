@@ -1,0 +1,14 @@
+<div class="row page-content">
+  <div class="login-inner">
+    <div class="card login">
+      <div class="card-logo center">
+      </div>
+      <div class="card-content">
+        <synkwise-invitation-create-form (sendInvitation)="sendInvitation($event)"
+                                         (editInvitation)="editInvitation($event)"
+                                         [roleList]="roleList?.model"
+                                         [invitationForEdit]="invitationModel"></synkwise-invitation-create-form>
+      </div>
+    </div>
+  </div>
+</div>
