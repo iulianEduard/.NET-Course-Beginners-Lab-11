@@ -1,0 +1,41 @@
+﻿@model Synkron.UI.Models.TaskManage.TaskManageUIModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@Scripts.Render("~/bundles/taskManageEdit")
+
+<h2>Create</h2>
+
+<div>
+    @using (Html.BeginForm("Create", "TaskManage", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.ValidationSummary(false)
+        <div class="form-group">
+            <div class="col-sm-4 control-label">
+                @Html.LabelFor(tm => tm.TaskId)
+            </div>
+            <div class="col-sm-4">
+                @Html.DropDownListFor(tm => tm.TaskId, Model.TaskList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4 control-label">
+                @Html.LabelFor(tm => tm.FrequencyId)
+            </div>
+            <div class="col-sm-4">
+                @Html.DropDownListFor(tm => tm.FrequencyId, Model.FrequencyList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4">
+                <button type="button" id="btn_Cancel_CreateTaskManage" class="btn btn-primary" onclick="cancelTaskManageCreate()">Cancel</button>
+            </div>
+            <div class="col-sm-4">
+                <button type="submit" id="btn_Save_CreateTaskManage" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    }
+</div>
+

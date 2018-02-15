@@ -1,0 +1,44 @@
+﻿@model Synkron.UI.Models.TaskManage.TaskManageWorker
+
+<div class="board">
+    @foreach (var frequency in Model.FrequencyList)
+    {
+        <div class="board-column bc-@frequency.Id" id="div-column-@frequency.Id" index="@frequency.Id">
+            <div class="board-column-header" id="div-column-header-@frequency.Id">
+                @frequency.Frequency
+            </div>
+            <div class="board-column-content" id="div-column-content-@frequency.Id">
+                <div class="board-item">
+                    @foreach (var task in Model.TaskManageList)
+                    {
+                        if (task.FrequencyId == frequency.Id)
+                        {
+                            <div class="board-item-content" id="@task.Id">
+                                <div>
+                                    <fieldset>
+                                        @task.TaskName
+                                        @if (frequency.Id > 0)
+                                        {
+                                            <button type="button" class="close btnClose" aria-label="Close" id="btn-Close-@task.Id" onclick="removeTask(@task.Id)">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        }
+                                    </fieldset>
+                                    <label>@task.TaskDescription</label>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="board-item-content" style="display: none;">
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+ <div>
+     @Html.ActionLink("Create", "Create", "TaskManage", new { @id = "btn_CreateTaskManage" })
+ </div>

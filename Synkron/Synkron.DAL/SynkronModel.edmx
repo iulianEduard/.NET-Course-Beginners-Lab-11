@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SynkronModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Frequency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Frequency" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskName" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="StatusID" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TaskManage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaskID" Type="int" />
+          <Property Name="FrequencyID" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Task_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskManage_Frequency">
+          <End Role="Frequency" Type="Self.Frequency" Multiplicity="0..1" />
+          <End Role="TaskManage" Type="Self.TaskManage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frequency">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskManage">
+              <PropertyRef Name="FrequencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskManage_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="TaskManage" Type="Self.TaskManage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskManage">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_GetAllTaskManage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetAllTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetTaskByStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StatusId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GetUnassignedTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="SynkronModelStoreContainer">
+          <EntitySet Name="Frequency" EntityType="Self.Frequency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskManage" EntityType="Self.TaskManage" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Task_Status" Association="Self.FK_Task_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskManage_Frequency" Association="Self.FK_TaskManage_Frequency">
+            <End Role="Frequency" EntitySet="Frequency" />
+            <End Role="TaskManage" EntitySet="TaskManage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskManage_Task" Association="Self.FK_TaskManage_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="TaskManage" EntitySet="TaskManage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SynkronModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Frequency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Frequency1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TaskManage" Relationship="Self.FK_TaskManage_Frequency" FromRole="Frequency" ToRole="TaskManage" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_Task_Status" FromRole="Status" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Task_Status" FromRole="Task" ToRole="Status" />
+          <NavigationProperty Name="TaskManage" Relationship="Self.FK_TaskManage_Task" FromRole="Task" ToRole="TaskManage" />
+        </EntityType>
+        <EntityType Name="TaskManage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaskID" Type="Int32" />
+          <Property Name="FrequencyID" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Frequency" Relationship="Self.FK_TaskManage_Frequency" FromRole="TaskManage" ToRole="Frequency" />
+          <NavigationProperty Name="Task" Relationship="Self.FK_TaskManage_Task" FromRole="TaskManage" ToRole="Task" />
+        </EntityType>
+        <Association Name="FK_TaskManage_Frequency">
+          <End Role="Frequency" Type="Self.Frequency" Multiplicity="0..1" />
+          <End Role="TaskManage" Type="Self.TaskManage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Frequency">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskManage">
+              <PropertyRef Name="FrequencyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskManage_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="TaskManage" Type="Self.TaskManage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TaskManage">
+              <PropertyRef Name="TaskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SynkronEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Frequency" EntityType="Self.Frequency" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Task" EntityType="Self.Task" />
+          <EntitySet Name="TaskManage" EntityType="Self.TaskManage" />
+          <AssociationSet Name="FK_TaskManage_Frequency" Association="Self.FK_TaskManage_Frequency">
+            <End Role="Frequency" EntitySet="Frequency" />
+            <End Role="TaskManage" EntitySet="TaskManage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_Status" Association="Self.FK_Task_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskManage_Task" Association="Self.FK_TaskManage_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="TaskManage" EntitySet="TaskManage" />
+          </AssociationSet>
+          <FunctionImport Name="usp_GetAllTasks" ReturnType="Collection(SynkronModel.usp_GetAllTasks_Result)" />
+          <FunctionImport Name="usp_GetTaskByStatus" ReturnType="Collection(SynkronModel.usp_GetTaskByStatus_Result)">
+          <Parameter Name="StatusId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetUnassignedTasks" ReturnType="Collection(SynkronModel.usp_GetUnassignedTasks_Result)" />
+          <FunctionImport Name="usp_GetAllTaskManage" ReturnType="Collection(SynkronModel.usp_GetAllTaskManage_Result)" />
+        </EntityContainer>
+        <ComplexType Name="usp_GetAllTasks_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="StatusId" Nullable="false" />
+          <Property Type="String" Name="StatusName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="usp_GetTaskByStatus_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="TaskName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="usp_GetUnassignedTasks_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="TaskName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAllTaskManage_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="TaskId" Nullable="false" />
+          <Property Type="String" Name="TaskName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Frequency" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FrequencyID" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SynkronModelStoreContainer" CdmEntityContainer="SynkronEntities">
+          <EntitySetMapping Name="Frequency">
+            <EntityTypeMapping TypeName="SynkronModel.Frequency">
+              <MappingFragment StoreEntitySet="Frequency">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Frequency1" ColumnName="Frequency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="SynkronModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Task">
+            <EntityTypeMapping TypeName="SynkronModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskManage">
+            <EntityTypeMapping TypeName="SynkronModel.TaskManage">
+              <MappingFragment StoreEntitySet="TaskManage">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="FrequencyID" ColumnName="FrequencyID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllTasks" FunctionName="SynkronModel.Store.usp_GetAllTasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SynkronModel.usp_GetAllTasks_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetTaskByStatus" FunctionName="SynkronModel.Store.usp_GetTaskByStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SynkronModel.usp_GetTaskByStatus_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetUnassignedTasks" FunctionName="SynkronModel.Store.usp_GetUnassignedTasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SynkronModel.usp_GetUnassignedTasks_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAllTaskManage" FunctionName="SynkronModel.Store.usp_GetAllTaskManage">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SynkronModel.usp_GetAllTaskManage_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="FrequencyID" ColumnName="FrequencyID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,49 @@
+﻿@model Synkron.UI.Models.Task.TaskUIModel
+
+@{
+    ViewBag.Title = "Create Task";
+}
+
+@Scripts.Render("~/bundles/task")
+
+<h2>Create Task</h2>
+
+<div>
+    @using (Html.BeginForm("Create", "Task", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.ValidationSummary(false)
+        <div class="form-group">
+            <div class="col-sm-4 control-label">
+                @Html.LabelFor(tm => tm.Name)
+            </div>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(tm => tm.Name, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4 control-label">
+                @Html.LabelFor(tm => tm.Description)
+            </div>
+            <div class="col-sm-4">
+                @Html.TextAreaFor(tm => tm.Description, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4 control-label">
+                @Html.LabelFor(tm => tm.StatusId)
+            </div>
+            <div class="col-sm-4">
+                @Html.DropDownListFor(tm => tm.StatusId, Model.StatusList, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4">
+                <button type="button" id="btn_Cancel_Create" class="btn btn-primary" onclick="cancelTaskCreate()">Cancel</button>
+            </div>
+            <div class="col-sm-4">
+                <button type="submit" id="btn_Save_Create" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    }
+</div>
+
